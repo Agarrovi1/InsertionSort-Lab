@@ -39,6 +39,13 @@ func insertionSortWithoutMovingNegatives<T: SignedInteger>(arr: [T], by isSorted
 // Question Three
 // Implement insertion sort in place
 func insertionSort<T: Comparable>(arr: inout [T], by isSorted: (T, T) -> Bool) -> [T] {
+    for indexOne in 1..<arr.count {
+        var indexTwo = indexOne
+        while indexTwo > 0 && !isSorted(arr[indexTwo - 1], arr[indexTwo]) {
+            arr.swapAt(indexTwo - 1, indexTwo)
+            indexTwo -= 1
+        }
+    }
     return arr
 }
 
