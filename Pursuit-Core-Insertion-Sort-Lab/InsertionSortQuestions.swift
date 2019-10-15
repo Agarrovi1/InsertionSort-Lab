@@ -5,13 +5,10 @@ import Foundation
 func insertionSorted<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
     var arr = arr
     for indexOne in 1..<arr.count {
-        print("IndexOne: \(indexOne)")
         var indexTwo = indexOne
         while indexTwo > 0 && !isSorted(arr[indexTwo - 1], arr[indexTwo]) {
             arr.swapAt(indexTwo - 1, indexTwo)
-            print(arr)
             indexTwo -= 1
-            
         }
     }
     return arr
@@ -20,7 +17,22 @@ func insertionSorted<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T
 // Question Two
 // Sort an array of Ints using insertion sort without changing the position of any negative numbers
 // https://www.geeksforgeeks.org/sort-an-array-without-changing-position-of-negative-numbers/
-func insertionSortWithoutMovingNegatives<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
+func insertionSortWithoutMovingNegatives<T: SignedInteger>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
+    var arr = arr
+    print(arr)
+    for indexOne in 2..<arr.count {
+        if arr[indexOne] < 0 {
+            continue
+        }
+        for indexTwo in 0..<indexOne {
+            if arr[indexTwo] < 0 {
+                continue
+            }
+            if isSorted(arr[indexOne], arr[indexTwo]) {
+                arr.swapAt(indexTwo, indexOne)
+            }
+        }
+    }
     return arr
 }
 
