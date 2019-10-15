@@ -52,6 +52,20 @@ func insertionSort<T: Comparable>(arr: inout [T], by isSorted: (T, T) -> Bool) -
 // Question Four
 // Implement insertion sort on a linked list
 func insertionSorted<T: Comparable>(list: LinkedList<T>, by isSorted: (T, T) -> Bool) -> LinkedList<T> {
+//    if list.count < 1 {
+//        return list
+//    }
+    print(list)
+    for indexOne in 1..<list.count {
+        var indexTwo = indexOne
+        while indexTwo > 0 && !isSorted(list.node(at: indexTwo - 1).value,list.node(at: indexTwo).value) {
+            list.insert(list.node(at: indexTwo).value, at: indexTwo - 1)
+            list.remove(at: indexTwo + 1)
+            indexTwo -= 1
+            print(list)
+        }
+        // lhs.value != rhs.value
+    }
     return list
 }
 
